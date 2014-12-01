@@ -15,6 +15,8 @@ _ "github.com/lib/pq"
   "strconv"
 )
 
+/* struct for image data */
+
 type Image struct {
 	pictureType int
 	mimeType string
@@ -25,6 +27,8 @@ type Image struct {
 	dataLength int
 	imageData string
 }
+
+/* JSON parser structs */
 
 type Samples struct {
 	PointNumber int `json:"Point Number"`
@@ -69,6 +73,8 @@ type Rec struct {
 
 func visit(path string, f os.FileInfo, err error) error {
 	if strings.Contains(path,"flac") != false {
+
+		/* CHANGE THE FOLLOWING LINE TO MATCH YOUR SYSTEM */
 		metaflacargs := []string{"-c","/xj/waitman/flac/src/metaflac/metaflac --output-json --list \"" + path + "\""};
 		cmd := exec.Command("/bin/sh",metaflacargs...);
 		output, err := cmd.CombinedOutput()
@@ -345,6 +351,8 @@ func main() {
 	  fmt.Println(" (Press Return to Quit)")
 	  fmt.Println()
 	  mpargs := []string{m[selected_idx]};
+
+	  /* CHANGE THE FOLLOWING LINE TO MATCH YOUR SYSTEM */
 	  cmd := exec.Command("/usr/local/bin/mplayer",mpargs...);
 	  cmd.Start()
 	  _,_ = reader.ReadString('\n')
